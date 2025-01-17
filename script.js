@@ -7,18 +7,23 @@ searchInput.addEventListener('input', function() {
     const searchTerm = this.value.trim();
 
     if(searchTerm === ""){
-        displayBox.innerHTML = "<p>RESULT</p>";
+        displayBox.innerHTML = "";
         return;
     }
 
     const searchNum = Number(searchTerm);
     // Display results
-    displayResults(searchNum);
+    if(searchNum <=6){
+        multiply(searchNum);
+    }
+    else{
+        displayResults(searchNum);
+    }
 });
 
 function displayResults(results) {
     // Clear previous results
-    displayBox.innerHTML = 'RESULT';
+    displayBox.innerHTML = '';
 
     
     if(array.includes(results)) {
@@ -31,4 +36,15 @@ function displayResults(results) {
     }
 
     
+}
+
+
+function multiply(results){
+    displayBox.innerHTML = 'RESULT';
+
+    const square = results*results;
+    displayBox.textContent = square;
+
+    return;
+
 }
