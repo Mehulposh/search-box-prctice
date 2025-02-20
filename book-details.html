@@ -10,17 +10,36 @@
 <body>
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">BookSite</a>
+          <a class="navbar-brand" href="/index.html">BookSite</a>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search Book" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
     </nav>
-    <div id="book">
-        
-    </div>
+    <main id="book-details-main">
+        <div class="book-details">
+            <div class="header">
+                <div id="language"></div>
+                <div id="bookImg"></div>
+                <div id="book-title">
+                    <div id="title">
+                        <h6>Title</h6>
+                    </div>
+                    <div id="author">
+                        <h6>Author's name</h6>
+                    </div>
+                </div>
+                <div id="tags">
+                    <h6>Tags</h6>
+                </div>
+            </div>
+            <div id="summary">
+                <h2>Summary :</h2>
+            </div>
+        </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="/script.js"></script>
+    <script src="/bookdetails.js" onload="fetchBookDetails()"></script>
 </body>
 </html>

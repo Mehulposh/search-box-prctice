@@ -1,50 +1,51 @@
-// Array with integers
-const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const searchInput = document.getElementById("searchBx");
-const displayBox = document.getElementById("result");
-
-searchInput.addEventListener('input', function() {
-    const searchTerm = this.value.trim();
-
-    if(searchTerm === ""){
-        displayBox.innerHTML = "";
-        return;
+async function fetchdata() {
+    try {
+        const response = await fetch("https://gutendex.com/books/");
+        const data = await response.json();
+        const newdata = data.results.slice(0, 50); // Extract the first 10 books
+        console.log(newdata);
+        addHeader(newdata);
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
     }
-
-    const searchNum = Number(searchTerm);
-    // Display results
-    if(searchNum <=6){
-        multiply(searchNum);
-    }
-    else{
-        displayResults(searchNum);
-    }
-});
-
-function displayResults(results) {
-    // Clear previous results
-    displayBox.innerHTML = '';
-
-    
-    if(array.includes(results)) {
-        displayBox.innerHTML = '<div class="result-1 no-results">true</div>';
-        return;
-    }
-    else{
-        displayBox.innerHTML = '<div class="result-1 no-results">false</div>';
-        return;
-    }
-
-    
 }
 
+function addHeader(data){
+    const bookContainer = document.querySelector("#book");
+    const row = document.createElement("div");
+    row.className = "row row-gap-4 booklist ";
+    data.forEach(book => {
+        
+        const col = document.createElement("div");
+        col.className ="col-12 col-sm-6 col-md-4 col-lg-2 bookitem";
+        const a_tag = document.createElement("a");
+        a_tag.className = "text-decoration-none";
+        a_tag.href = `/book-details.html?id=${book.id}`; 
 
-function multiply(results){
-    displayBox.innerHTML = 'RESULT';
+        const card = document.createElement("div");
+        card.className = "card bookCover h-100";
+        const img = document.createElement("img");
+        img.className = "card-img-top";
+        img.src = book.formats["image/jpeg"];
+        card.appendChild(img);
 
-    const square = results*results;
-    displayBox.textContent = square;
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
+        const title = document.createElement("h6");
+        title.className = "text2row mt-2";
+        title.textContent = book.title;
 
-    return;
-
+        cardBody.appendChild(title);
+        card.appendChild(cardBody);
+        a_tag.appendChild(card);
+        col.appendChild(a_tag);
+        row.appendChild(col);
+        bookContainer.appendChild(row);
+    });
 }
+
+ 
+
+
+
+fetchdata();
