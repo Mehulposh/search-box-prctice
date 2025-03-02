@@ -53,3 +53,4 @@ function addDetails(book){
     p.textContent = book.summaries[0];
     summary.appendChild(p);
 }
+
